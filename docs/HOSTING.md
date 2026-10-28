@@ -1,5 +1,24 @@
 # Hosted demo
 
+## Quickest public link: Hugging Face Space
+
+The Dockerfile serves the whole app (frontend, API and the preprocessed demo data) on port 7860, the port Hugging Face
+Spaces uses, and runs as user 1000. Create a free account, make a token with **Write** access
+(huggingface.co/settings/tokens), then from the repository root:
+
+```bash
+export HF_TOKEN=hf_...            # PowerShell: $env:HF_TOKEN = "hf_..."
+pip install huggingface_hub
+python scripts/deploy_hf_space.py --space aicte-verisense
+```
+
+The script uploads the last committed state, adds the Space front matter to the README (the GitHub README is unchanged),
+and prints the live URL. The first build takes a few minutes. Use `--private` to keep the Space visible only to you, or
+`--dry-run` to check the export without uploading. Free Spaces have no persistent disk, so uploads and edits reset when
+the Space restarts; the seeded demo data is always restored.
+
+## Other hosts
+
 The frontend can run on ChatGPT Sites. Live OCR, uploads, findings, rules and
 decisions run on the Python backend on a separate Docker-capable host.
 
