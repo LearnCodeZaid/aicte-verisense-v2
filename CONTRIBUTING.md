@@ -1,6 +1,6 @@
 # Contributing
 
-Use `feat/M3-07-region-scoping`, `fix/M1-11-report-errors` or `docs/M1-01-audit` branches. Keep changes scoped to a numbered requirement. See docs/TEAM_CONTRACTS.md for ownership; agree before editing another member's shared contract.
+Use `feat/M3-07-region-scoping`, `fix/M1-11-report-errors` or `docs/M1-01-audit` branches. Keep changes scoped to a numbered requirement. See docs/internal/TEAM_CONTRACTS.md for ownership; agree before editing another member's shared contract.
 
 Install locked dependencies with `cd backend; uv sync --frozen` and `cd frontend; npm ci`. Use synthetic data only. Tests must use temporary database, storage and source-state paths. Never run a seed reset or refresh on a shared database as part of CI or smoke checks.
 

@@ -13,6 +13,22 @@ explainable, evidence-linked result. It never approves or rejects anything on it
 > This is a prototype, not an official AICTE system. All institutions, people, documents and issuing authorities in it are
 > **synthetic**.
 
+## Live demo
+
+### **https://aicte-verisense-v2.onrender.com**
+
+Open it and sign in with a demo account. The password for every account is **`Demo@2026`**.
+
+| Try this | Sign in as | What you will see |
+|---|---|---|
+| **A deliberately tampered application** | `officer.nro` | Open **Apex Valley (Increase in Intake)**, then Documents → *Land Ownership* → *View document*: the altered land deed is marked on the page |
+| **A clean application** | `officer.wro` | Low risk, almost nothing flagged |
+| **The institution's side** | `inst.apex` | A draft being corrected with a checklist-driven upload |
+| **The final decision** | `rd.wro` | Recommendations waiting, and approval blocked while critical findings are open |
+
+The login page lists every demo account. It runs on a free host, so after idle time the first load can take about a minute.
+All data is synthetic.
+
 ![Evidence marked on the document itself](docs/screenshots/04-evidence-on-the-page.png)
 
 *A deliberately altered land deed. The survey number and land area are outlined in red, each labelled with what the official
@@ -90,43 +106,32 @@ Numbers below are stored in [`samples/evaluation.json`](samples/evaluation.json)
 The forensic recall is low and we say so: the indicators are conservative, a missed edit is a known limitation, and no result
 is presented as proof of forgery.
 
-## Run it
+## Run it yourself
 
-Requirements: Python 3.11 with [uv](https://docs.astral.sh/uv/), Node.js 18+.
+<details>
+<summary>Local setup (Python 3.11 with uv, Node.js 18+)</summary>
 
 ```bash
-# Backend: http://localhost:8001 (seeds demo data on first start)
+# Backend (seeds demo data on first start)
 cd backend
 uv sync
 uv run uvicorn app.main:app --port 8001
 
-# Frontend: http://localhost:5176 (proxies /api to the backend)
+# Frontend (proxies /api to the backend)
 cd frontend
 npm install
 npm run dev
 ```
 
-Or with Docker: `docker compose up --build` (serves everything on port 7860).
+Or with Docker: `docker compose up --build` serves everything on port 7860.
 
-- Portal sign-in: <http://localhost:5176/portal/login> · API docs: <http://localhost:8001/docs>
 - Reset demo data: `cd backend && uv run python -m seed.seed --reset`
 - Tests: `cd backend && uv run pytest` (80 tests) · `cd frontend && npm test` (13 tests) · browser walk-through: `cd frontend && node scripts/smoke-ui.mjs`
+- All demo accounts use the password `Demo@2026`: `inst.nvie`, `inst.piat`, `inst.apex` (institutions), `officer.wro`, `officer.nro`, `rd.wro` (Regional Director), `admin`.
 
-### Demo accounts
+</details>
 
-All accounts use the password **`Demo@2026`**.
-
-| Username | Role | Use it to |
-|---|---|---|
-| `inst.nvie` | Institution (Narmada Valley) | Upload a complete, clean application |
-| `inst.piat` | Institution (Pragati) | See an application with hidden rule violations |
-| `inst.apex` | Institution (Apex Valley) | See tampered documents and a draft being corrected |
-| `officer.wro` / `officer.nro` | Scrutiny officer (Western / Northern region) | Review applications and recommend |
-| `rd.wro` | Regional Director | Record the final decision |
-| `admin` | Administrator | Rules, sources and the audit log |
-
-A seven-minute walkthrough is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md). Synthetic test documents, including clean,
-tampered and incomplete sets, are in [`samples/`](samples/).
+A seven-minute walkthrough is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md). Synthetic test documents, including clean, tampered and incomplete sets, are in [`samples/`](samples/).
 
 ## Architecture
 

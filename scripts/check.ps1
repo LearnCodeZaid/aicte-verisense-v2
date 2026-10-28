@@ -1,4 +1,4 @@
-param([string]$Report = "docs/check-results.json")
+param([string]$Report = "docs/internal/check-results.json")
 $ErrorActionPreference = 'Continue'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $results = @()

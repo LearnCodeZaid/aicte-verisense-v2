@@ -48,3 +48,8 @@ backend/storage/
 .pytest_cache/
 *.ela.png
 .env
+
+# Machine-specific local-run helpers (kept on the developer PC, not in the repo)
+scripts/start-local.ps1
+scripts/stop-local.ps1
+docs/LOCAL_HOSTING.md
